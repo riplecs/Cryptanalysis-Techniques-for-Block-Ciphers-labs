@@ -43,7 +43,7 @@ if __name__ == '__main__':
     TEXTS = collect_ct(1024)
     beta = [273, 4369, 2184, 17]
     
-    print('Last round key: ', hex(last_round_attack(TEXTS, beta) + 1)[2:])
+    print('Last round key: ', hex(last_round_attack(TEXTS, beta))[2:])
     
     TEXTS = collect_ct(3072)
     beta = [273, 4368, 4369, 1, 17]
