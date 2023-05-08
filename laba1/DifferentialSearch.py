@@ -61,4 +61,19 @@ if __name__ == '__main__':
             continue
         difs = DifferentialSearch(v)
         if difs != {}:
-            print(v, difs)
+            print('\t alpha = ', v)
+            for b in difs:
+                print(f'beta = {b}, DP({v}, {b}) = ', difs[b])
+                
+    '''
+    for v in [1024, 2560, 3072, 3584, 3840]:
+        print('\n\t alpha = ', v)
+        for r in range(2, 7):
+            difs = DifferentialSearch(v, r)
+            if difs != {}:
+                print('Round ',  r - 1)
+                for b in difs:
+                    print(f'beta = {b}, DP({v}, {b}) = ', difs[b])
+                    if list(difs.keys()).index(b) > 3:
+                        break
+    '''
