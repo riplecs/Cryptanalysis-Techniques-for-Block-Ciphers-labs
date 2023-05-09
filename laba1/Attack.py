@@ -12,13 +12,13 @@ def collect_ct(alpha, n = 1000):
     for x in range(n):
         with open('x.bin', 'wb') as f:
             f.write(x.to_bytes(2, 'little'))
-        subprocess.run('heys e 5 x.bin x_e.bin key.bin')
+        subprocess.run('heys e 5 x.bin x_e.bin')
         with open('x_e.bin', 'rb') as f:
             c = int.from_bytes(f.read(), 'little')
         x ^= alpha
         with open('x.bin', 'wb') as f:
             f.write(x.to_bytes(2, 'little'))
-        subprocess.run('heys e 5 x.bin x_e.bin key.bin')
+        subprocess.run('heys e 5 x.bin x_e.bin')
         with open('x_e.bin', 'rb') as f:
             c_ = int.from_bytes(f.read(), 'little')
         cipher_texts.append((c, c_))
