@@ -31,7 +31,7 @@ def diff_probs_table_F():
         file.write(str(table_alpha_i) + '\n')
     file.close()
  
-def DifferentialSearch(alpha, r = 6, prob = 0.001):
+def DifferentialSearch(alpha, r = 6, prob = 0.0005):
     Gamma_0 = {alpha: 1}
     for t in range(1, r):
         Gamma_t = {}
