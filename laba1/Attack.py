@@ -7,7 +7,7 @@ Created on Mon Mar  6 08:05:14 2023
 
 from Heys import *
 
-def collect_ct(alpha, n = 3000):
+def collect_ct(alpha, n = 4000):
     cipher_texts = []
     for x in range(n):
         with open('x.bin', 'wb') as f:
@@ -43,5 +43,5 @@ if __name__ == '__main__':
     TEXTS = collect_ct(24576)
     print('Last round key: ', hex(last_round_attack(TEXTS, [1088, 16452, 17476, 1632]))[2:])
     
-    TEXTS = collect_ct(6)
-    print('Last round key: ', hex(last_round_attack(TEXTS, [544, 8226, 8738]))[2:])
+    #TEXTS = collect_ct(6)
+    #print('Last round key: ', hex(last_round_attack(TEXTS, [544, 8226, 8738]))[2:])
