@@ -66,7 +66,7 @@ if __name__ == '__main__':
                 print(f'beta = {b}, DP({v}, {b}) = ', difs[b])
                 
     '''
-    for v in [1024, 2560, 3072, 3584, 3840]:
+    for v in [6, 9, 1536, 24576, 36864, 45056]:
         print('\n\t alpha = ', v)
         for r in range(2, 7):
             difs = DifferentialSearch(v, r)
