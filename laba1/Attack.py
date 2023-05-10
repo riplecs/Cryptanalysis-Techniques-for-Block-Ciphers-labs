@@ -32,7 +32,7 @@ def last_round_attack(cipher_texts, beta):
         for (c, c_) in cipher_texts:
             y = inv_round_func(c, k)
             y_ = inv_round_func(c_, k)
-            if y_^y == beta:
+            if y_^y in beta:
                 count += 1
         Keys.append(count)
     return Keys.index(max(Keys)) + 1
@@ -41,7 +41,7 @@ def last_round_attack(cipher_texts, beta):
 if __name__ == '__main__':
     
     TEXTS = collect_ct(24576)
-    print('Last round key: ', hex(last_round_attack(TEXTS, 17476))[2:])
+    print('Last round key: ', hex(last_round_attack(TEXTS, [1088, 16452, 17476, 1632]))[2:])
     
     TEXTS = collect_ct(6)
-    print('Last round key: ', hex(last_round_attack(TEXTS, 8738))[2:])
+    print('Last round key: ', hex(last_round_attack(TEXTS, [544, 8226, 8738]))[2:])
