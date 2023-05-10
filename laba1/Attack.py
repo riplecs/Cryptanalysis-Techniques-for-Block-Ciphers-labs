@@ -7,7 +7,7 @@ Created on Mon Mar  6 08:05:14 2023
 
 from Heys import *
 
-def collect_ct(alpha, n = 1000):
+def collect_ct(alpha, n = 3000):
     cipher_texts = []
     for x in range(n):
         with open('x.bin', 'wb') as f:
