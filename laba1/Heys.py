@@ -11,8 +11,8 @@ import linecache
 import ast
 
 
-S = [0xf, 8, 0xe, 9, 7, 2, 0, 0xd, 0xc, 6, 1, 5, 0xb, 4, 3, 0xa]
-S_inv = [6, 0xa, 5, 0xe, 0xd, 0xb, 9, 4, 1, 3, 0xf, 0xc, 8, 7, 2, 0]
+S = [3, 8, 0xd, 9, 6, 0xb, 0xf, 0, 2, 5, 0xc, 0xa, 4, 0xe, 1, 7]
+S_inv = [7, 0xe, 8, 0, 0xc, 9, 4, 0xf, 1, 3, 0xb, 5, 0xa, 2, 0xd, 6]
 pi = [0, 4, 8, 12, 1, 5, 9, 13, 2, 6, 10, 14, 3, 7, 11, 15]
 
 random.seed(100)
@@ -69,7 +69,7 @@ if __name__ == '__main__':
     print('Перевірка:')
     with open('x.bin', 'wb') as f:
         f.write(X.to_bytes(2, 'little'))
-    subprocess.run('heys e 5 x.bin x_e.bin key.bin')
+    subprocess.run('heys e 4 x.bin x_e.bin key.bin')
     with open('x_e.bin', 'rb') as f:
         x_e = f.read()
     print('E_k(x) = ', hex(int.from_bytes(x_e, 'little'))[2:])
