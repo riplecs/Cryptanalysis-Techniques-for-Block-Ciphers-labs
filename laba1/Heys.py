@@ -12,7 +12,6 @@ import ast
 
 
 S = [3, 8, 0xd, 9, 6, 0xb, 0xf, 0, 2, 5, 0xc, 0xa, 4, 0xe, 1, 7]
-S_inv = [7, 0xe, 8, 0, 0xc, 9, 4, 0xf, 1, 3, 0xb, 5, 0xa, 2, 0xd, 6]
 pi = [0, 4, 8, 12, 1, 5, 9, 13, 2, 6, 10, 14, 3, 7, 11, 15]
 
 random.seed(100)
@@ -35,7 +34,7 @@ def inv_round_func(x, key):
     x ^= key
     x = bits_perm(x)
     y0, y1, y2, y3 = x&0xf, (x >> 4)&0xf, (x >> 8)&0xf, (x >> 12)&0xf
-    z0, z1, z2, z3 = S_inv[y0], S_inv[y1], S_inv[y2], S_inv[y3]
+    z0, z1, z2, z3 = S.index(y0), S.index(y1), S.index(y2), S.index(y3)
     return (z3 << 12) + (z2 << 8) + (z1 << 4) + z0
 
 def Heys(x, key):
