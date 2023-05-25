@@ -12,7 +12,6 @@ import ast
 
 
 S = [0xf, 8, 0xe, 9, 7, 2, 0, 0xd, 0xc, 6, 1, 5, 0xb, 4, 3, 0xa]
-S_inv = [6, 0xa, 5, 0xe, 0xd, 0xb, 9, 4, 1, 3, 0xf, 0xc, 8, 7, 2, 0]
 pi = [0, 4, 8, 12, 1, 5, 9, 13, 2, 6, 10, 14, 3, 7, 11, 15]
 
 
@@ -33,23 +32,9 @@ def round_func(x, key):
     z = (z3 << 12) + (z2 << 8) + (z1 << 4) + z0
     return bits_perm(z)
 
-def inv_round_func(x, key):
-    x ^= key
-    x = bits_perm(x)
-    y0, y1, y2, y3 = x&0xf, (x >> 4)&0xf, (x >> 8)&0xf, (x >> 12)&0xf
-    z0, z1, z2, z3 = S_inv[y0], S_inv[y1], S_inv[y2], S_inv[y3]
-    return (z3 << 12) + (z2 << 8) + (z1 << 4) + z0
-
 def Heys(x, key):
     for i in range(6):
         x = round_func(x, key[i])
-    x ^= key[-1]
-    return x
-
-def inv_Heys(x, key):
-    key = key[::-1]
-    for i in range(6):
-        x = inv_round_func(x, key[i])
     x ^= key[-1]
     return x
                     
@@ -67,7 +52,6 @@ if __name__ == '__main__':
     KEY = [int(k, 16) for k in KEY]
     X_e = Heys(X, KEY)
     print('E_k(x) = ', hex(X_e)[2:])
-    #print(hex(inv_Heys(X_e, KEY)))
     print('Перевірка:')
     with open('x.bin', 'wb') as f:
         f.write(X.to_bytes(2, 'little'))
