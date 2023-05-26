@@ -12,7 +12,7 @@ def collect_ct(n = 10000):
     for x in range(n):
         with open('x.bin', 'wb') as f:
             f.write(x.to_bytes(2, 'little'))
-        Popen('heys e 4 x.bin x_e.bin key.bin', stdin = PIPE).communicate('\n'.encode())
+        Popen('heys e 4 x.bin x_e.bin', stdin = PIPE).communicate('\n'.encode())
         with open('x_e.bin', 'rb') as f:
             c = int.from_bytes(f.read(), 'little')
         texts.append((x, c))
