@@ -15,11 +15,12 @@ from LinearApproximationsSearch import dot
 from AttackData import TEXTS, BEST_APPROXS
 
 
-def M2(alpha, beta, texts):
+def M2(approx):
+    alpha, beta = approx
     keys = np.zeros((2**16,))
     for k in range(2**16):
         u_k = 0
-        for x, y in texts:
+        for x, y in TEXTS[:8000]:
             x1 = round_func(x, k)
             if dot(alpha, x1)^dot(beta, y) == 0:
                 u_k += 1
@@ -30,26 +31,23 @@ def M2(alpha, beta, texts):
     return keys[:50]
 
 
-def first_round_attack(approxs):
-    keys = np.zeros((2**16,))
-    for alpha, beta in approxs:
-        print(alpha, beta)
-        keys_ = M2(alpha, beta, TEXTS[:1000])
-        for k in keys_:
-            keys[k] += 1
-    _, keys = zip(*sorted(zip(keys, range(2**16)), reverse = True))
-    return keys[:10]
-
-
 if __name__ == '__main__':
     
     print('Attack has started')
     
     start_time = time.time()
+    keys = np.zeros((2**16,))
+    with Pool() as pool:
+        RESULTS = pool.map(M2, [app for app in BEST_APPROXS])
+    for mass in RESULTS:
+        for k_i in mass:
+            keys[k_i] += 1
+    stat, keys = zip(*sorted(zip(keys, range(2**16)), reverse = True))
     
-    with Pool(8) as pool:
-        print(pool.map(first_round_attack, 
-                       [BEST_APPROXS[i*50:i*50 + 50] for i in range(8)]))
-        
     print('Attack is finished succefully, time: %.2f s' % (time.time() - start_time))
+    
+    for i in range(10):
+        print('k = ', keys[i], 'statistic = ', stat[i])
+  
+    
     
