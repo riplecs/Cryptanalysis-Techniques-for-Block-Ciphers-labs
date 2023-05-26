@@ -56,7 +56,7 @@ def linear_approxs_table_F():
     file.close()
     
     
-def LinearApproximationsSearch(alpha, r = 6, lim = 0.0001):
+def LinearApproximationsSearch(alpha, r = 6, lim = 0.00012):
     Gamma_0 = {alpha: 1}
     for t in range(1, r):
         Gamma_t = {}
