@@ -26,7 +26,7 @@ def M2(approx):
                 u_k += 1
             else:
                 u_k -= 1
-        keys[k] = u_k
+        keys[k] = abs(u_k)
     _, keys = zip(*sorted(zip(keys, range(2**16)), reverse = True))
     return keys[:50]
 
