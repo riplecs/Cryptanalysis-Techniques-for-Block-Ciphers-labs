@@ -13,5 +13,5 @@ TEXTS = ast.literal_eval(data[0])
 
 with open('BEST_APPROXS.txt', 'r') as f:
     data = f.readlines()
-BEST_APPROXS = [ast.literal_eval(d) for d in data]
+BEST_APPROXS = ast.literal_eval(data[0])
 
