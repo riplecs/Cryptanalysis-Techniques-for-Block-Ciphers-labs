@@ -20,7 +20,7 @@ def M2(approx):
     keys = np.zeros((2**16,))
     for k in range(2**16):
         u_k = 0
-        for x, y in TEXTS[:8000]:
+        for x, y in TEXTS:
             x1 = round_func(x, k)
             if dot(alpha, x1)^dot(beta, y) == 0:
                 u_k += 1
