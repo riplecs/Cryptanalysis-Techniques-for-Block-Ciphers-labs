@@ -56,12 +56,12 @@ def linear_approxs_table_F():
     file.close()
     
     
-def LinearApproximationsSearch(alpha, r = 6, lim = 0.00012):
+def LinearApproximationsSearch(alpha, all_approxes, r = 6, lim = 0.00012):
     Gamma_0 = {alpha: 1}
     for t in range(1, r):
         Gamma_t = {}
         for beta_i in Gamma_0:
-            delta = ALL_APPROX[beta_i]
+            delta = all_approxes[beta_i]
             for gamma_j in delta:
                 if gamma_j in Gamma_t:
                     Gamma_t[gamma_j] += Gamma_0[beta_i]*delta[gamma_j]
@@ -72,12 +72,17 @@ def LinearApproximationsSearch(alpha, r = 6, lim = 0.00012):
     return Gamma_t
 
 
-def BestApproximations():
+def BestApproximations(file = 'table_F.txt'):
+    
+    with open(file, 'r') as f:
+        data = f.readlines()
+    all_approxes = {i: dict(ast.literal_eval(data[i])) for i in range(2**16)}
+    
     best_app = []
     for v in range(1, 2**16):
         if [v&0xf, (v >> 4)&0xf, (v >> 8)&0xf, (v >> 12)&0xf].count(0) < 3:
             continue
-        approxs = LinearApproximationsSearch(v)
+        approxs = LinearApproximationsSearch(v, all_approxes)
         if approxs != {}:
             print('\t alpha = ', v)
             for b in approxs:
@@ -87,17 +92,12 @@ def BestApproximations():
 
 
 if __name__ == '__main__':
-    
-    #print(pd.DataFrame(linear_approximations_S()))
+   
     #print(pd.DataFrame(linear_potentials_table_S()).round(4))
     
     #potentials = linear_approxs_table_F()
     
-    file = open('table_F.txt', 'r')
-    data = file.readlines()
-    file.close()
-    ALL_APPROX = {i: dict(ast.literal_eval(data[i])) for i in range(2**16)}
+    best_approximations = BestApproximations() 
     
-    best_approximations = BestApproximations()    
     with open('BEST_APPROXS.txt', 'w') as f:
         f.write(str(best_approximations))
