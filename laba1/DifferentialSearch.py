@@ -5,6 +5,7 @@ Created on Mon Mar  6 11:22:13 2023
 @author: Daria
 """
 
+import ast
 from Heys import *
 
 def differential_S(alpha, beta):
@@ -31,7 +32,7 @@ def diff_probs_table_F():
         file.write(str(table_alpha_i) + '\n')
     file.close()
  
-def DifferentialSearch(alpha, r = 6, prob = 0.0005):
+def DifferentialSearch(alpha, all_differentials, r = 6, prob = 0.0005):
     Gamma_0 = {alpha: 1}
     for t in range(1, r):
         Gamma_t = {}
@@ -59,7 +60,7 @@ if __name__ == '__main__':
     for v in range(1, 2**16):
         if [v&0xf, (v >> 4)&0xf, (v >> 8)&0xf, (v >> 12)&0xf].count(0) < 3:
             continue
-        difs = DifferentialSearch(v)
+        difs = DifferentialSearch(v, all_differentials)
         if difs != {}:
             print('\t alpha = ', v)
             for b in difs:
