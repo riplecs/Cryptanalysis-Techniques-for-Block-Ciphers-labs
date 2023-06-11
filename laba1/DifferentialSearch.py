@@ -36,7 +36,6 @@ def DifferentialSearch(alpha, all_differentials, r = 6, prob = 0.0005):
     Gamma_0 = {alpha: 1}
     for t in range(1, r):
         Gamma_t = {}
-        print(Gamma_t)
         for beta_i in Gamma_0:
             delta = all_differentials[beta_i]
             for gamma_j in delta:
