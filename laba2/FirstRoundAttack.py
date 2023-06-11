@@ -28,7 +28,7 @@ def M2(approx):
                 u_k -= 1
         keys[k] = abs(u_k)
     _, keys = zip(*sorted(zip(keys, range(2**16)), reverse = True))
-    return keys[:50]
+    return keys[:100]
 
 
 if __name__ == '__main__':
@@ -38,7 +38,7 @@ if __name__ == '__main__':
     start_time = time.time()
     keys = np.zeros((2**16,))
     with Pool() as pool:
-        RESULTS = pool.map(M2, [app for app in BEST_APPROXS])
+        RESULTS = pool.map(M2, BEST_APPROXS)
     for mass in RESULTS:
         for k_i in mass:
             keys[k_i] += 1
